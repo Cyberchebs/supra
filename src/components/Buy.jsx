@@ -108,6 +108,8 @@ const Buy = () => {
         </div>
  
       </div>
+
+      copyright @ 2024 | Made by  chebem nzom
     </div>
   )
 }
