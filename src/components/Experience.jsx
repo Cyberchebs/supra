@@ -16,7 +16,7 @@ const Experience = () => {
   gsap.registerPlugin(ScrollTrigger)
 
   const isMobile = useMediaQuery({ maxWidth: 768 })
-  const { supraRef } = useScene()
+  const { supraRef, setSupraRef, modelReady } = useScene()
   const { camera } = useThree()  
   const camProxy = useRef({ x: 0, y: 1, z: 8, fov: 50 })
 
@@ -31,6 +31,8 @@ const Experience = () => {
 
 
   useGSAP(() => {
+
+    if (!modelReady || !supraRef.current) return
 
     const heroSplit = new SplitText(".head", {
 	 type: "chars, words",
@@ -116,14 +118,14 @@ const Experience = () => {
      ScrollTrigger.refresh()
 
 
-  }, [])
+  }, [modelReady])
 
 
   return (
     <>
          <ambientLight intensity={3} />
        <mesh  position={[0,0,0]} >
-          <Supra ref={supraRef} 
+          <Supra ref={setSupraRef} 
           position={[ isMobile ? 0.2 :  0.4, -2.3, 0.4]}
           rotation={[0.00, -1.59, 0.18]}
           scale={isMobile ? 0.5 :1.00} />

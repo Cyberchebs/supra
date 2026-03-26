@@ -17,8 +17,7 @@ function App() {
 
   gsap.registerPlugin(ScrollTrigger)
  
-// ⚡ Kick off both GLB downloads immediately — before any component mounts.
-// Adjust these paths to match where your actual .glb files live.
+
     useGLTF.preload('/models/3dcomponents/Toyota_supra_dekztrax_34.glb')
     useGLTF.preload('/models/Inline_6_engine.glb')
 
