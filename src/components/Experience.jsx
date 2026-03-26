@@ -126,19 +126,7 @@ const Experience = () => {
     ease: 'power2.out',
   })
 
- const doRefresh = () => {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          ScrollTrigger.refresh()
-        })
-      })
-    }
- 
-    if (document.readyState === 'complete') {
-      doRefresh()
-    } else {
-      window.addEventListener('load', doRefresh, { once: true })
-    }
+   setTimeout(() => ScrollTrigger.refresh(), 300)
 
 
   }, [modelReady])
