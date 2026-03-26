@@ -1,4 +1,3 @@
-
 import './index.css'
 import Hero from './components/Hero'
 import Scene from './components/Scene'
@@ -8,24 +7,20 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 import { SceneProvider } from './context/Scenecontext'
 import Buy from './components/Buy'
-import { useGLTF, } from '@react-three/drei'
 import Loader from './components/Loader'
-import { useEffect } from 'react'
+import { useGLTF } from '@react-three/drei'
 import { useScene } from './context/Scenecontext'
+import { useEffect } from 'react'
 
-function App() {
+gsap.registerPlugin(ScrollTrigger)
 
-  gsap.registerPlugin(ScrollTrigger) 
+useGLTF.preload('/3dcomponents/Toyota_supra_dekztrax_34.glb')
+useGLTF.preload('/3dcomponents/Inline_6_engine.glb')
 
-  gsap.registerPlugin(ScrollTrigger)
- 
-
-    useGLTF.preload('/models/3dcomponents/Toyota_supra_dekztrax_34.glb')
-    useGLTF.preload('/models/Inline_6_engine.glb')
-
-    const ScrollLock = () => {
+// Separate component so it can access SceneContext
+const ScrollLock = () => {
   const { modelReady } = useScene()
- 
+
   useEffect(() => {
     // ✅ Lock scroll immediately on mount — user cannot scroll at all
     // while the model is loading. This guarantees scroll = 0 when
@@ -34,7 +29,7 @@ function App() {
     document.body.style.position = 'fixed'
     document.body.style.width = '100%'
     document.body.style.top = '0'
- 
+
     return () => {
       // Cleanup in case component unmounts unexpectedly
       document.body.style.overflow = ''
@@ -43,10 +38,10 @@ function App() {
       document.body.style.top = ''
     }
   }, [])
- 
+
   useEffect(() => {
     if (!modelReady) return
- 
+
     // ✅ Model is ready — unlock scroll and ensure we're at the top.
     // Small delay so the unlock happens after GSAP timelines are built
     // in Experience.jsx (which also runs on modelReady).
@@ -57,34 +52,44 @@ function App() {
       document.body.style.top = ''
       window.scrollTo(0, 0)
     }, 100)
- 
+
     return () => clearTimeout(timer)
   }, [modelReady])
- 
+
   return null
 }
 
+function App() {
   return (
     <SceneProvider>
       <Loader />
+      <ScrollLock />
 
-      <div className='rig' 
-      style={{ 
-        position: 'fixed', top: 0, left: 0, width: '100%', height: '100dvh', zIndex:2 ,pointerEvents:'none'
-         }}>
+      <div className='rig' style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100dvh',
+        zIndex: 2,
+        pointerEvents: 'none',
+      }}>
         <Scene />
       </div>
-      <main style={{ position: 'relative',zIndex:1 }}> 
+
+      <main style={{ position: 'relative', zIndex: 1 }}>
         <Hero />
-        <Check/>
+        <Check />
       </main>
-       <div style={{zIndex:3, position:'relative'}}>
-          <SupraFAQ />
-        </div> 
-        <div style={{zIndex:3, position:"relative"}} >
-           <Buy/>
-        </div>
-    </SceneProvider> 
+
+      <div style={{ zIndex: 3, position: 'relative' }}>
+        <SupraFAQ />
+      </div>
+
+      <div style={{ zIndex: 3, position: 'relative' }}>
+        <Buy />
+      </div>
+    </SceneProvider>
   )
 }
 
