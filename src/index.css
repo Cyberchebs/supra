@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=IM+Fell+English:ital@0;1&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Racing+Sans+One&family=UnifrakturMaguntia&display=swap');
+
+@import "tailwindcss";
+
+
+
+.archivo {
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.racing-sans {
+  font-family: "Racing Sans One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.first-head{
+  background-color: red;
+  height: 100dvh;
+  width: 100%;
+
+}
+
+.second-head{
+  height: 100dvh;
+  width: 100%;
+
+}
+
+.third-head{
+    height: 100dvh;
+    width: 100%;
+}
+
+.last{
+    height: 100dvh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+body{
+
+
+
+  background-color: white;
+}
