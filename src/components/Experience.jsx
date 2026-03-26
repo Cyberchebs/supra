@@ -36,6 +36,17 @@ const Experience = () => {
 
      ScrollTrigger.normalizeScroll(true)
 
+       gsap.set(supraRef.current.position, {
+      x: isMobile ? 0.2 : 0.4,
+      y: -2.3,
+      z: 0.4,
+    })
+    gsap.set(supraRef.current.rotation, {
+      x: 0.00,
+      y: -1.59,
+      z: 0.18,
+    })
+
     const heroSplit = new SplitText(".head", {
 	 type: "chars, words",
 	});

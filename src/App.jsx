@@ -25,7 +25,7 @@ function App() {
     <SceneProvider>
       <Loader />
 
-      <div className='rig' style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex:2}}>
+      <div className='rig' style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100dvh', zIndex:2}}>
         <Scene />
       </div>
       <main style={{ position: 'relative',zIndex:1 }}> 
