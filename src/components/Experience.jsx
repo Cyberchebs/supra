@@ -34,6 +34,8 @@ const Experience = () => {
 
     if (!modelReady || !supraRef.current) return
 
+     ScrollTrigger.normalizeScroll(true)
+
     const heroSplit = new SplitText(".head", {
 	 type: "chars, words",
 	});
@@ -112,7 +114,7 @@ const Experience = () => {
     duration: 0.8,
     ease: 'power2.out',
   })
-  
+
  const doRefresh = () => {
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
