@@ -2,7 +2,7 @@ import React from 'react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Engine from './Engine';
 import { Canvas } from '@react-three/fiber';
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 
 
 
@@ -28,7 +28,9 @@ const Check = () => {
           }}
       >turbo charge <span className=' text-red-600'>inline-6</span> engine inside </h2>
         <Canvas camera={{ position: [0, 1, 10] }}  rotation={[0.00, -1, 0]}>
-          <Engine/>
+           <Suspense fallback={null}>
+            <Engine />
+          </Suspense>
         </Canvas>
       </div>
     </section>

@@ -8,13 +8,24 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 import { SceneProvider } from './context/Scenecontext'
 import Buy from './components/Buy'
+import { useGLTF } from '@react-three/drei'
+import Loader from './components/Loader'
 
 function App() {
 
   gsap.registerPlugin(ScrollTrigger) 
 
+  gsap.registerPlugin(ScrollTrigger)
+ 
+// ⚡ Kick off both GLB downloads immediately — before any component mounts.
+// Adjust these paths to match where your actual .glb files live.
+    useGLTF.preload('/models/3dcomponents/Toyota_supra_dekztrax_34.glb')
+    useGLTF.preload('/models/Inline_6_engine.glb')
+
   return (
     <SceneProvider>
+      <Loader />
+
       <div className='rig' style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex:2}}>
         <Scene />
       </div>
