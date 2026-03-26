@@ -11,6 +11,7 @@ import Loader from './components/Loader'
 import { useGLTF } from '@react-three/drei'
 import { useScene } from './context/Scenecontext'
 import { useEffect } from 'react'
+import { useGSAP } from '@gsap/react'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -38,6 +39,10 @@ const ScrollLock = () => {
       document.body.style.top = ''
     }
   }, [])
+
+  useGSAP(() => {
+    ScrollTrigger.refresh()
+  })
 
   useEffect(() => {
     if (!modelReady) return

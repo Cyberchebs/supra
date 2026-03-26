@@ -11,10 +11,7 @@ const Loader = () => {
   useEffect(() => {
     if (!modelReady) return
 
-    // ✅ Wait for GSAP timelines to finish building in Experience.jsx (they
-    // also run on modelReady), then refresh ScrollTrigger so it remeasures
-    // all section positions with the correct viewport height.
-    // 500ms is enough for the S9's slower JS engine to finish everything.
+
     const timer = setTimeout(() => {
       ScrollTrigger.refresh()
 
