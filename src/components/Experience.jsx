@@ -7,7 +7,7 @@ import { useRef } from 'react'
 import { useScene } from '../context/Scenecontext'
 import { useThree } from '@react-three/fiber'
 import { useMediaQuery } from 'react-responsive'
-import { ScrollTrigger } from 'gsap/all'
+import { ScrollTrigger, SplitText } from 'gsap/all'
 
 
 
@@ -31,6 +31,10 @@ const Experience = () => {
 
 
   useGSAP(() => {
+
+    const heroSplit = new SplitText(".head", {
+	 type: "chars, words",
+	});
     
   const hasPlayed = sessionStorage.getItem('introPlayed')
 
@@ -42,6 +46,13 @@ const Experience = () => {
       onComplete: () => sessionStorage.setItem('introPlayed', 'true')
     })
   }
+    gsap.from(heroSplit.chars, {
+	 yPercent: 50,
+	 duration: 1.8,
+   opacity: 0,
+	 ease: "expo.out",
+	 stagger: 0.06,
+	   });
 
     const tl = gsap.timeline({
       scrollTrigger: {
