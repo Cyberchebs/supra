@@ -3,7 +3,7 @@ import { OrbitControls } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { useGSAP } from '@gsap/react'
 import {gsap} from 'gsap'
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { useScene } from '../context/Scenecontext'
 import { useThree } from '@react-three/fiber'
 import { useMediaQuery } from 'react-responsive'
@@ -27,6 +27,21 @@ const Experience = () => {
     camera.fov = camProxy.current.fov
     camera.updateProjectionMatrix()
   })
+
+
+  useEffect(() => {
+    if (!window.visualViewport) return
+    let rafId
+    const onResize = () => {
+      cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(() => ScrollTrigger.refresh())
+    }
+    window.visualViewport.addEventListener('resize', onResize)
+    return () => {
+      window.visualViewport.removeEventListener('resize', onResize)
+      cancelAnimationFrame(rafId)
+    }
+  }, [])
 
 
 
