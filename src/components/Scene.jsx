@@ -15,7 +15,7 @@ import { useEffect, Suspense } from 'react'
 
 const Scene = () => {
   return (
-     <div  style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100dvh', }}>
+     <div  style={{  width: '100%', height: '100dvh', }}>
         <Canvas  camera={{ position: [0, 1, 8], fov: 50 }}>
              <Suspense fallback={null}>
           <Experience />
