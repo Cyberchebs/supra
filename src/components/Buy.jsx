@@ -2,7 +2,7 @@ import React from 'react'
 
 const Buy = () => {
   return (
-    <div className="last" id="last">
+    <div className="last flex flex-col" id="last">
       <div className="min-h-screen  flex items-center justify-center px-4 py-20"
         style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
  
