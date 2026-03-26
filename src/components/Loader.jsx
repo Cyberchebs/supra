@@ -3,16 +3,25 @@ import { useEffect, useRef } from 'react'
 import { useScene } from '../context/Scenecontext'
 
 const Loader = () => {
-  const { progress, active } = useProgress()
+  const { progress } = useProgress()
   const { modelReady } = useScene()
   const overlayRef = useRef(null)
 
   useEffect(() => {
-    // ✅ Only fade out once the 3D model is fully mounted and ready —
-    // not just when assets finish downloading. This way scroll is
-    // unlocked at the exact same moment GSAP timelines are built.
     if (!modelReady) return
 
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+    const hasReloaded = sessionStorage.getItem('hasReloaded')
+
+    if (isMobile && !hasReloaded) {
+      // Mark it so we don't loop — reload only happens once per session
+      sessionStorage.setItem('hasReloaded', 'true')
+      // Small delay so the GLB is fully cached before reload
+      setTimeout(() => window.location.reload(), 300)
+      return
+    }
+
+    // Desktop or already reloaded — just fade out normally
     const el = overlayRef.current
     if (!el) return
     el.style.transition = 'opacity 0.8s ease'
