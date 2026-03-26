@@ -112,10 +112,20 @@ const Experience = () => {
     duration: 0.8,
     ease: 'power2.out',
   })
-
   
-
-     ScrollTrigger.refresh()
+ const doRefresh = () => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh()
+        })
+      })
+    }
+ 
+    if (document.readyState === 'complete') {
+      doRefresh()
+    } else {
+      window.addEventListener('load', doRefresh, { once: true })
+    }
 
 
   }, [modelReady])
