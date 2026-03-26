@@ -49,7 +49,9 @@ const Experience = () => {
 
     if (!modelReady || !supraRef.current) return
 
-     ScrollTrigger.normalizeScroll(true)
+
+      window.scrollTo(0, 0)
+
 
        gsap.set(supraRef.current.position, {
       x: isMobile ? 0.2 : 0.4,
