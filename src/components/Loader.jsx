@@ -1,6 +1,7 @@
 import { useProgress } from '@react-three/drei'
 import { useEffect, useRef } from 'react'
 import { useScene } from '../context/Scenecontext'
+import { ScrollTrigger } from 'gsap/all'
 
 const Loader = () => {
   const { progress } = useProgress()
@@ -10,23 +11,22 @@ const Loader = () => {
   useEffect(() => {
     if (!modelReady) return
 
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-    const hasReloaded = sessionStorage.getItem('hasReloaded')
+    // ✅ Wait for GSAP timelines to finish building in Experience.jsx (they
+    // also run on modelReady), then refresh ScrollTrigger so it remeasures
+    // all section positions with the correct viewport height.
+    // 500ms is enough for the S9's slower JS engine to finish everything.
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh()
 
-    if (isMobile && !hasReloaded) {
-      // Mark it so we don't loop — reload only happens once per session
-      sessionStorage.setItem('hasReloaded', 'true')
-      // Small delay so the GLB is fully cached before reload
-      setTimeout(() => window.location.reload(), 300)
-      return
-    }
+      // Fade out the loader after refresh is done
+      const el = overlayRef.current
+      if (!el) return
+      el.style.transition = 'opacity 0.8s ease'
+      el.style.opacity = '0'
+      setTimeout(() => { el.style.display = 'none' }, 800)
+    }, 500)
 
-    // Desktop or already reloaded — just fade out normally
-    const el = overlayRef.current
-    if (!el) return
-    el.style.transition = 'opacity 0.8s ease'
-    el.style.opacity = '0'
-    setTimeout(() => { el.style.display = 'none' }, 800)
+    return () => clearTimeout(timer)
   }, [modelReady])
 
   return (
