@@ -1,12 +1,17 @@
 import { useProgress } from '@react-three/drei'
 import { useEffect, useRef } from 'react'
+import { useScene } from '../context/Scenecontext'
 
 const Loader = () => {
   const { progress, active } = useProgress()
   const overlayRef = useRef(null)
+  const { modelReady } = useScene()
+
 
   useEffect(() => {
-    if (!active && progress === 100) {
+      if(!modelReady) return null
+
+    
       const el = overlayRef.current
       if (!el) return
       el.style.transition = 'opacity 0.8s ease'
@@ -14,8 +19,8 @@ const Loader = () => {
       setTimeout(() => {
         el.style.display = 'none'
       }, 800)
-    }
-  }, [active, progress])
+  
+  }, [modelReady])
 
   return (
     <div

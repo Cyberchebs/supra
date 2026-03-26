@@ -8,8 +8,10 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 import { SceneProvider } from './context/Scenecontext'
 import Buy from './components/Buy'
-import { useGLTF } from '@react-three/drei'
+import { useGLTF, } from '@react-three/drei'
 import Loader from './components/Loader'
+import { useEffect } from 'react'
+import { useScene } from './context/Scenecontext'
 
 function App() {
 
@@ -20,6 +22,47 @@ function App() {
 
     useGLTF.preload('/models/3dcomponents/Toyota_supra_dekztrax_34.glb')
     useGLTF.preload('/models/Inline_6_engine.glb')
+
+    const ScrollLock = () => {
+  const { modelReady } = useScene()
+ 
+  useEffect(() => {
+    // ✅ Lock scroll immediately on mount — user cannot scroll at all
+    // while the model is loading. This guarantees scroll = 0 when
+    // GSAP builds its timelines, so scrub never seeks to a wrong position.
+    document.body.style.overflow = 'hidden'
+    document.body.style.position = 'fixed'
+    document.body.style.width = '100%'
+    document.body.style.top = '0'
+ 
+    return () => {
+      // Cleanup in case component unmounts unexpectedly
+      document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.width = ''
+      document.body.style.top = ''
+    }
+  }, [])
+ 
+  useEffect(() => {
+    if (!modelReady) return
+ 
+    // ✅ Model is ready — unlock scroll and ensure we're at the top.
+    // Small delay so the unlock happens after GSAP timelines are built
+    // in Experience.jsx (which also runs on modelReady).
+    const timer = setTimeout(() => {
+      document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.width = ''
+      document.body.style.top = ''
+      window.scrollTo(0, 0)
+    }, 100)
+ 
+    return () => clearTimeout(timer)
+  }, [modelReady])
+ 
+  return null
+}
 
   return (
     <SceneProvider>
