@@ -28,6 +28,18 @@ const Experience = () => {
     camera.updateProjectionMatrix()
   })
 
+
+    let resizeTimer
+    window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer)
+    resizeTimer = setTimeout(() => {
+      if (window.innerWidth === window.screen.width) {
+       
+        ScrollTrigger.refresh()
+      }
+    }, 200)
+  })
+
   
 
   useGSAP(() => {
