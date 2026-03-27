@@ -13,6 +13,10 @@ import { useScene } from './context/Scenecontext'
 import { useEffect } from 'react'
 import { useGSAP } from '@gsap/react'
 
+
+ScrollTrigger.config({
+  ignoreMobileResize: true,
+})
 gsap.registerPlugin(ScrollTrigger)
 
 useGLTF.preload('/3dcomponents/Toyota_supra_dekztrax_34.glb')

@@ -8,11 +8,13 @@ import { useThree } from '@react-three/fiber'
 import { useMediaQuery } from 'react-responsive'
 import { ScrollTrigger, SplitText } from 'gsap/all'
 
-gsap.registerPlugin(ScrollTrigger)
+
 
 ScrollTrigger.config({
   ignoreMobileResize: true,
 })
+gsap.registerPlugin(ScrollTrigger)
+
 
 const Experience = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 })
