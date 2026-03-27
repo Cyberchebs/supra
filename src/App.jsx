@@ -22,6 +22,18 @@ gsap.registerPlugin(ScrollTrigger)
 useGLTF.preload('/3dcomponents/Toyota_supra_dekztrax_34.glb')
 useGLTF.preload('/3dcomponents/Inline_6_engine.glb')
 
+
+let resizeTimer
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer)
+  resizeTimer = setTimeout(() => {
+    if (window.innerWidth === window.screen.width) {
+      // Only refresh on real orientation changes, not address bar changes
+      ScrollTrigger.refresh()
+    }
+  }, 200)
+})
+
 // Separate component so it can access SceneContext
 const ScrollLock = () => {
   const { modelReady } = useScene()

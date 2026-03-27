@@ -34,24 +34,24 @@
 
 .first-head{
   background-color: red;
-  height: 100dvh;
+  height: calc(var(--vh, 1vh) * 100);
   width: 100%;
 
 }
 
 .second-head{
-  height: 100dvh;
+ height: calc(var(--vh, 1vh) * 100);
   width: 100%;
 
 }
 
 .third-head{
-    height: 100dvh;
+   height: calc(var(--vh, 1vh) * 100);
     width: 100%;
 }
 
 .last{
-    height: 100dvh;
+    height: calc(var(--vh, 1vh) * 100);
     width: 100%;
     display: flex;
     justify-content: center;
