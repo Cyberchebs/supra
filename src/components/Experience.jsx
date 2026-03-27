@@ -26,20 +26,7 @@ const Experience = () => {
     camera.updateProjectionMatrix()
   })
 
-  // Refresh ScrollTrigger when mobile URL bar resizes viewport
-  useEffect(() => {
-    if (!window.visualViewport) return
-    let rafId
-    const onResize = () => {
-      cancelAnimationFrame(rafId)
-      rafId = requestAnimationFrame(() => ScrollTrigger.refresh())
-    }
-    window.visualViewport.addEventListener('resize', onResize)
-    return () => {
-      window.visualViewport.removeEventListener('resize', onResize)
-      cancelAnimationFrame(rafId)
-    }
-  }, [])
+  
 
   useGSAP(() => {
     if (!modelReady || !supraRef.current) return
@@ -119,7 +106,7 @@ const Experience = () => {
       ease: 'power2.out',
     })
 
-    setTimeout(() => ScrollTrigger.refresh(), 300)
+    ScrollTrigger.refresh()
 
   }, [modelReady])
 

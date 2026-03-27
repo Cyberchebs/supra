@@ -2,29 +2,28 @@ import { useProgress } from '@react-three/drei'
 import { useEffect, useRef } from 'react'
 import { useScene } from '../context/Scenecontext'
 import { ScrollTrigger } from 'gsap/all'
+import { gsap } from 'gsap'
 
 const Loader = () => {
   const { progress } = useProgress()
   const { modelReady } = useScene()
   const overlayRef = useRef(null)
 
-  useEffect(() => {
-    if (!modelReady) return
+ useEffect(() => {
+  if (!modelReady) return
 
+  gsap.to(overlayRef.current, {
+    opacity: 0,
+    duration: 1,
+    ease: 'power2.inOut',
+    onComplete: () => {
+      if (overlayRef.current) {
+        overlayRef.current.style.display = 'none'
+      }
+    },
+  })
+}, [modelReady])
 
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh()
-
-      // Fade out the loader after refresh is done
-      const el = overlayRef.current
-      if (!el) return
-      el.style.transition = 'opacity 0.8s ease'
-      el.style.opacity = '0'
-      setTimeout(() => { el.style.display = 'none' }, 800)
-    }, 500)
-
-    return () => clearTimeout(timer)
-  }, [modelReady])
 
   return (
     <div

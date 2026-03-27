@@ -22,23 +22,7 @@ useGLTF.preload('/3dcomponents/Inline_6_engine.glb')
 const ScrollLock = () => {
   const { modelReady } = useScene()
 
-  useEffect(() => {
-    // ✅ Lock scroll immediately on mount — user cannot scroll at all
-    // while the model is loading. This guarantees scroll = 0 when
-    // GSAP builds its timelines, so scrub never seeks to a wrong position.
-    document.body.style.overflow = 'hidden'
-    document.body.style.position = 'fixed'
-    document.body.style.width = '100%'
-    document.body.style.top = '0'
-
-    return () => {
-      // Cleanup in case component unmounts unexpectedly
-      document.body.style.overflow = ''
-      document.body.style.position = ''
-      document.body.style.width = ''
-      document.body.style.top = ''
-    }
-  }, [])
+ 
 
   useGSAP(() => {
     ScrollTrigger.refresh()
@@ -47,9 +31,7 @@ const ScrollLock = () => {
   useEffect(() => {
     if (!modelReady) return
 
-    // ✅ Model is ready — unlock scroll and ensure we're at the top.
-    // Small delay so the unlock happens after GSAP timelines are built
-    // in Experience.jsx (which also runs on modelReady).
+   
     const timer = setTimeout(() => {
       document.body.style.overflow = ''
       document.body.style.position = ''
