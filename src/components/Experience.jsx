@@ -10,6 +10,10 @@ import { ScrollTrigger, SplitText } from 'gsap/all'
 
 gsap.registerPlugin(ScrollTrigger)
 
+ScrollTrigger.config({
+  ignoreMobileResize: true,
+})
+
 const Experience = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 })
   const { supraRef, setSupraRef, modelReady } = useScene()
@@ -40,10 +44,7 @@ const Experience = () => {
   useGSAP(() => {
     if (!modelReady || !supraRef.current) return
 
-    // Scroll is guaranteed to be 0 here because ScrollLock in App.jsx
-    // keeps overflow:hidden until modelReady, and only unlocks 100ms
-    // after this runs. No need for window.scrollTo() anymore.
-
+    
     gsap.set(supraRef.current.position, { x: isMobile ? 0.2 : 0.4, y: -2.3, z: 0.4 })
     gsap.set(supraRef.current.rotation, { x: 0.00, y: -1.59, z: 0.18 })
 
