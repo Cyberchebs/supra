@@ -1,5 +1,4 @@
 import React from 'react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Engine from './Engine';
 import { Canvas } from '@react-three/fiber';
 import { useEffect, Suspense } from 'react';

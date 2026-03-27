@@ -1,9 +1,15 @@
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { faqs } from "../../constants/qa";
+
+gsap.registerPlugin(ScrollTrigger);
+
 
 export default function SupraFAQ() {
   const [openIndex, setOpenIndex] = useState(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     const link = document.createElement("link");
@@ -13,6 +19,29 @@ export default function SupraFAQ() {
     document.head.appendChild(link);
     return () => document.head.removeChild(link);
   }, []);
+  
+  useGSAP(() => {
+  const items = gsap.utils.toArray('.faq-item'); 
+
+ 
+  gsap.set(items, { opacity: 0, y: 50 });
+
+  ScrollTrigger.create({
+    trigger: containerRef.current,
+    start: 'top 75%',
+    once: true, // 
+    onEnter: () => {
+      gsap.to(items, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        stagger: 0.2,
+      });
+    },
+  });
+
+}, []); 
 
   const toggle = (i) => setOpenIndex(openIndex === i ? null : i);
 
@@ -22,7 +51,7 @@ export default function SupraFAQ() {
       style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
       id="check"
     >
-      {/* Header */}
+      
       <div className="max-w-2xl mx-auto mb-12 relative">
         <div className="absolute -left-4 top-0 bottom-0 w-1 bg-red-600 rounded-full" />
 
@@ -56,13 +85,13 @@ export default function SupraFAQ() {
       </div>
 
       {/* Accordion */}
-      <div className="max-w-2xl mx-auto flex flex-col gap-2">
+      <div ref={containerRef} className="max-w-2xl mx-auto flex flex-col gap-2">
         {faqs.map((item, i) => {
           const isOpen = openIndex === i;
           return (
             <div
               key={i}
-              className={`rounded-lg border transition-all duration-300 overflow-hidden ${
+              className={`faq-item rounded-lg border transition-all duration-300 overflow-hidden ${
                 isOpen
                   ? "border-red-600 bg-zinc-900"
                   : "border-zinc-800 bg-zinc-900 hover:border-zinc-600"

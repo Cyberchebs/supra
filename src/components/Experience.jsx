@@ -2,7 +2,7 @@ import { Supra } from '../../3dcomponents/Toyota_supra_dekztrax_34'
 import { useFrame } from '@react-three/fiber'
 import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
-import { useRef, useEffect } from 'react'
+import { useRef} from 'react'
 import { useScene } from '../context/Scenecontext'
 import { useThree } from '@react-three/fiber'
 import { useMediaQuery } from 'react-responsive'
@@ -123,6 +123,9 @@ const Experience = () => {
     ScrollTrigger.refresh()
 
   }, [modelReady])
+
+
+  
 
   return (
     <>
