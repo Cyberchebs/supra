@@ -11,7 +11,8 @@ import React, {forwardRef} from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export const Supra = forwardRef((props, ref) => {
-  const { nodes, materials } = useGLTF('/models/toyota_supra_dekztrax_34.glb')
+  const { nodes, materials } = useGLTF('/models/toyota_supra_compressed.glb',
+                                       'https://www.gstatic.com/draco/versioned/decoders/1.5.6/')
   return (
     <group ref={ref} {...props} dispose={null}>
       <group position={[0, 0.161, 0.008]} rotation={[1.554, 0, 0]}>
@@ -167,4 +168,5 @@ export const Supra = forwardRef((props, ref) => {
   )
 })
 
-useGLTF.preload('/models/toyota_supra_dekztrax_34.glb')
+useGLTF.preload('/models/toyota_supra_compressed.glb',
+                'https://www.gstatic.com/draco/versioned/decoders/1.5.6/')

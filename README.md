@@ -1,22 +1,6 @@
-x
--0.4
-y
-8.9
-z
-10.2
-fov
-15
-posX
--2.6
-posY
--0.9
-posZ
--2.7
-rotX
-0.12
-rotY
--2.41
-rotZ
--0.06
-scale
-1.33
+to check for animations compresions e.t.c
+npx @gltf-transform inspect public/models/toyota_supra_dekztrax_34.glb
+
+
+to compress
+ bunx @gltf-transform/cli draco public/models/toyota_supra_dekztrax_34.glb public/models/toyota_supra_compressed.glbS
