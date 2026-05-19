@@ -19,7 +19,8 @@ ScrollTrigger.config({
 })
 gsap.registerPlugin(ScrollTrigger)
 
-useGLTF.preload('/3dcomponents/Toyota_supra_dekztrax_34.glb')
+useGLTF.preload('/models/toyota_supra_compressed.glb',
+                'https://www.gstatic.com/draco/versioned/decoders/1.5.6/')
 useGLTF.preload('/3dcomponents/Inline_6_engine.glb')
 
 
